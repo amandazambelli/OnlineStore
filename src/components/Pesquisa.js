@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import Product from './Produto';
 
@@ -40,15 +41,17 @@ class Pesquisa extends React.Component {
       return (
         <h3>
           Nenhum produto foi encontrado
-        </h3>
+        </h3>   
       );
     }
   }
 
+class Pesquisa extends React.Component {
   render() {
     const { searchBox, searchedProducts } = this.state;
     return (
       <div>
+        <Link data-testid="shopping-cart-button" to="/carrinho">Carrinho</Link>
         <input
           type="text"
           data-testid="query-input"

@@ -1,19 +1,11 @@
 import React from 'react';
 import './App.css';
 import { Route, BrowserRouter } from 'react-router-dom';
-import { getCategories, getProductsFromCategoryAndQuery } from './services/api';
 import Pesquisa from './components/Pesquisa';
 import Carrinho from './components/Carrinho';
 import BarraCategoria from './components/BarraCategoria';
 
 class App extends React.Component {
-  async componentDidMount() {
-    const data = await getCategories();
-    const test = await getProductsFromCategoryAndQuery('', 'martelo');
-    console.log(test);
-    console.log(data);
-  }
-
   render() {
     return (
       <BrowserRouter>

@@ -41,12 +41,11 @@ class Pesquisa extends React.Component {
       return (
         <h3>
           Nenhum produto foi encontrado
-        </h3>   
+        </h3>
       );
     }
   }
 
-class Pesquisa extends React.Component {
   render() {
     const { searchBox, searchedProducts } = this.state;
     return (

@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Pesquisa extends React.Component {
+class Carrinho extends React.Component {
   render() {
     return (
       <div>
@@ -10,4 +10,4 @@ class Pesquisa extends React.Component {
   }
 }
 
-export default Pesquisa;
+export default Carrinho;

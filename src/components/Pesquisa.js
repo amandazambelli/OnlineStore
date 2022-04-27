@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import Product from './Produto';
@@ -60,6 +61,7 @@ class Pesquisa extends React.Component {
 
   render() {
     const { searchBox, searchedProducts } = this.state;
+    const { addToCart } = this.props;
     return (
       <div>
         <Link data-testid="shopping-cart-button" to="/carrinho">Carrinho</Link>
@@ -80,10 +82,19 @@ class Pesquisa extends React.Component {
         <BarraCategoria searchCategory={ this.searchCategory } />
         {this.returnText()}
         { searchedProducts
-          .map((product) => <Product product={ product } key={ product.id } />)}
+          .map((product) => (
+            <Product
+              addToCart={ addToCart }
+              product={ product }
+              key={ product.id }
+            />))}
       </div>
     );
   }
 }
+
+Pesquisa.propTypes = {
+  addToCart: PropTypes.func.isRequired,
+};
 
 export default Pesquisa;

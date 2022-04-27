@@ -6,12 +6,37 @@ import Pesquisa from './components/Pesquisa';
 import ProductPage from './components/ProductPage';
 
 class App extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      cart: [],
+    };
+  }
+
+  addToCart = (product) => {
+    this.setState((prevState) => ({
+      cart: [...prevState.cart, product],
+    }));
+  }
+
   render() {
+    const { cart } = this.state;
     return (
       <BrowserRouter>
         <Route path="/product/:id" component={ ProductPage } />
-        <Route exact path="/" component={ Pesquisa } />
-        <Route exact path="/carrinho" component={ Carrinho } />
+        <Route
+          exact
+          path="/"
+          render={ (props) => (
+            <Pesquisa { ...props } addToCart={ this.addToCart } />) }
+        />
+        <Route
+          exact
+          path="/carrinho"
+          render={ (props) => (
+            <Carrinho { ...props } cart={ cart } />) }
+        />
       </BrowserRouter>
     );
   }

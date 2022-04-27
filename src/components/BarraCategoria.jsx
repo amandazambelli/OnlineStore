@@ -1,6 +1,5 @@
 import React from 'react';
-import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
-import Product from './Produto';
+import { getCategories } from '../services/api';
 
 class BarraCategoria extends React.Component {
   constructor() {
@@ -8,7 +7,6 @@ class BarraCategoria extends React.Component {
 
     this.state = {
       selecionarCategorias: [],
-      buscaCategoria: [],
     };
   }
 
@@ -17,18 +15,12 @@ class BarraCategoria extends React.Component {
     this.setState({
       selecionarCategorias: categorie,
     });
-    this.getCategory();
-  }
-
-  getCategory = async (id) => {
-    const products = await getProductsFromCategoryAndQuery(id, '');
-    this.setState({
-      buscaCategoria: products.results,
-    });
+    this.searchProducts();
   }
 
   render() {
-    const { selecionarCategorias, buscaCategoria } = this.state;
+    const { selecionarCategorias } = this.state;
+    const { getId } = this.props;
     return (
       <div>
         { selecionarCategorias.map((element) => (
@@ -37,12 +29,12 @@ class BarraCategoria extends React.Component {
             key={ element.id }
             data-testid="category"
             value={ element.id }
-            onClick={ () => this.getCategory(element.id) }
+            onClick={ () => {
+              getId(element.id);
+            } }
           >
             { element.name }
           </button>)) }
-        { buscaCategoria
-          .map((product) => <Product product={ product } key={ product.id } />)}
       </div>
     );
   }

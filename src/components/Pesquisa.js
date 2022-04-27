@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import Product from './Produto';
+import BarraCategoria from './BarraCategoria';
 
 class Pesquisa extends React.Component {
   constructor() {
@@ -10,12 +11,13 @@ class Pesquisa extends React.Component {
       searchedProducts: [],
       searchBox: '',
       searched: false,
+      idCategory: '',
     };
   }
 
   searchProduts = async () => {
-    const { searchBox } = this.state;
-    const products = await getProductsFromCategoryAndQuery('', searchBox);
+    const { searchBox, idCategory } = this.state;
+    const products = await getProductsFromCategoryAndQuery(idCategory, searchBox);
     this.setState({
       searchedProducts: products.results,
       searchBox: '',
@@ -26,6 +28,10 @@ class Pesquisa extends React.Component {
   handleChange = ({ target }) => {
     const { value, name } = target;
     this.setState({ [name]: value });
+  }
+
+  getId = (id) => {
+    this.setState({ idCategory: id });
   }
 
   returnText = () => {
@@ -66,6 +72,7 @@ class Pesquisa extends React.Component {
         >
           Buscar
         </button>
+        <BarraCategoria getId={ this.getId } searchProduts={ this.searchProduts } />
         {this.returnText()}
         { searchedProducts
           .map((product) => <Product product={ product } key={ product.id } />)}

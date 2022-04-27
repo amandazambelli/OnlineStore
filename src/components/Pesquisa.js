@@ -17,6 +17,7 @@ class Pesquisa extends React.Component {
 
   searchProduts = async () => {
     const { searchBox, idCategory } = this.state;
+    if (searchBox.length > 0) this.setState({ idCategory: '' });
     const products = await getProductsFromCategoryAndQuery(idCategory, searchBox);
     this.setState({
       searchedProducts: products.results,
@@ -32,6 +33,11 @@ class Pesquisa extends React.Component {
 
   getId = (id) => {
     this.setState({ idCategory: id });
+  }
+
+  searchCategory = async (id) => {
+    await this.getId(id);
+    await this.searchProduts();
   }
 
   returnText = () => {
@@ -67,12 +73,11 @@ class Pesquisa extends React.Component {
         <button
           type="submit"
           data-testid="query-button"
-          id="xpto"
           onClick={ this.searchProduts }
         >
           Buscar
         </button>
-        <BarraCategoria getId={ this.getId } searchProduts={ this.searchProduts } />
+        <BarraCategoria searchCategory={ this.searchCategory } />
         {this.returnText()}
         { searchedProducts
           .map((product) => <Product product={ product } key={ product.id } />)}

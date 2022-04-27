@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { getCategories } from '../services/api';
 
 class BarraCategoria extends React.Component {
@@ -15,12 +16,11 @@ class BarraCategoria extends React.Component {
     this.setState({
       selecionarCategorias: categorie,
     });
-    this.searchProducts();
   }
 
   render() {
     const { selecionarCategorias } = this.state;
-    const { getId } = this.props;
+    const { searchCategory } = this.props;
     return (
       <div>
         { selecionarCategorias.map((element) => (
@@ -29,9 +29,7 @@ class BarraCategoria extends React.Component {
             key={ element.id }
             data-testid="category"
             value={ element.id }
-            onClick={ () => {
-              getId(element.id);
-            } }
+            onClick={ () => searchCategory(element.id) }
           >
             { element.name }
           </button>)) }
@@ -39,5 +37,9 @@ class BarraCategoria extends React.Component {
     );
   }
 }
+
+BarraCategoria.propTypes = {
+  searchCategory: PropTypes.func.isRequired,
+};
 
 export default BarraCategoria;

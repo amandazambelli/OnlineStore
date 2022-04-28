@@ -24,7 +24,11 @@ class App extends React.Component {
     const { cart } = this.state;
     return (
       <BrowserRouter>
-        <Route path="/product/:id" component={ ProductPage } />
+        <Route
+          path="/product/:id"
+          render={ (props) => (
+            <ProductPage { ...props } addToCart={ this.addToCart } />) }
+        />
         <Route
           exact
           path="/"

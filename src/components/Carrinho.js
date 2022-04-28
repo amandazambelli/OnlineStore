@@ -11,17 +11,19 @@ class Carrinho extends React.Component {
 
   render() {
     const { cart } = this.props;
+    const ItensUnicos = [...new Set(cart)];
     return (
       <div>
         { this.renderCart() }
-        { cart.map((element) => (
+        { ItensUnicos.map((element) => (
           <div key={ element.id }>
             <p data-testid="shopping-cart-product-name">{ element.title }</p>
             <img src={ element.thumbnail } alt={ element.title } />
             <p>{ element.price }</p>
+            <p>{ cart.filter((item) => item === element).length }</p>
           </div>
         )) }
-        <span data-testid="shopping-cart-product-quantity">{ cart.length }</span>
+        <span data-testid="shopping-cart-product-quantity">{ ItensUnicos.length }</span>
       </div>
     );
   }

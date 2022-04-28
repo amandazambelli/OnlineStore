@@ -20,6 +20,13 @@ class App extends React.Component {
     }));
   }
 
+  removeItemCart = (cart, product) => {
+    const index = cart.lastIndexOf(product);
+    cart.splice(index, 1);
+    this.setState(({ cart: [...cart] }
+    ));
+  }
+
   render() {
     const { cart } = this.state;
     return (
@@ -39,7 +46,12 @@ class App extends React.Component {
           exact
           path="/carrinho"
           render={ (props) => (
-            <Carrinho { ...props } cart={ cart } />) }
+            <Carrinho
+              { ...props }
+              cart={ cart }
+              removeItemCart={ this.removeItemCart }
+              addToCart={ this.addToCart }
+            />) }
         />
       </BrowserRouter>
     );

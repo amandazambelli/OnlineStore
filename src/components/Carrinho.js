@@ -10,7 +10,7 @@ class Carrinho extends React.Component {
   }
 
   render() {
-    const { cart } = this.props;
+    const { cart, removeItemCart, addToCart } = this.props;
     const ItensUnicos = [...new Set(cart)];
     return (
       <div>
@@ -20,10 +20,31 @@ class Carrinho extends React.Component {
             <p data-testid="shopping-cart-product-name">{ element.title }</p>
             <img src={ element.thumbnail } alt={ element.title } />
             <p>{ element.price }</p>
-            <p>{ cart.filter((item) => item === element).length }</p>
+            <button
+              data-testid="product-decrease-quantity"
+              type="button"
+              onClick={ () => removeItemCart(cart, element) }
+            >
+              -
+            </button>
+            <p>
+              <span data-testid="shopping-cart-product-quantity">
+                { cart.filter((item) => item === element).length }
+              </span>
+            </p>
+            <button
+              data-testid="product-increase-quantity"
+              type="button"
+              onClick={ () => addToCart(element) }
+            >
+              +
+            </button>
           </div>
         )) }
-        <span data-testid="shopping-cart-product-quantity">{ ItensUnicos.length }</span>
+        <p>
+          Total Carrinho:
+          <span data-testid="product-increase-quantity">{ cart.length }</span>
+        </p>
       </div>
     );
   }
@@ -31,6 +52,9 @@ class Carrinho extends React.Component {
 
 Carrinho.propTypes = {
   cart: PropTypes.arrayOf.isRequired,
+  removeItemCart: PropTypes.func.isRequired,
+  addToCart: PropTypes.func.isRequired,
+
 };
 
 export default Carrinho;

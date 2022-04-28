@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getProduct } from '../services/api';
 
@@ -36,6 +37,7 @@ class ProductPage extends React.Component {
 
   render() {
     const { product, loading } = this.state;
+    const { addToCart } = this.props;
     return (
       <div>
         { loading && <h2>Loading</h2> }
@@ -44,6 +46,15 @@ class ProductPage extends React.Component {
         </p>
         <p>{ product.price }</p>
         <img src={ product.thumbnail } alt={ product.title } />
+        <button
+          data-testid="product-detail-add-to-cart"
+          type="button"
+          onClick={ () => addToCart(product) }
+        >
+          Adicionar ao carrinho
+
+        </button>
+        <Link data-testid="shopping-cart-button" to="/carrinho">Carrinho</Link>
         <p>Especificação técnicas</p>
         { this.renderAttributes(product) }
       </div>
@@ -52,7 +63,8 @@ class ProductPage extends React.Component {
 }
 
 ProductPage.propTypes = {
-  match: PropTypes.arrayOf.isRequired,
-};
+  match: PropTypes.arrayOf,
+  addToCart: PropTypes.func,
+}.isRequired;
 
 export default ProductPage;

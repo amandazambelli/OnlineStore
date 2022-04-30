@@ -1,7 +1,7 @@
 .productList {
   display: flex;
-  flex-wrap: wrap;
   align-content: space-around;
+  flex-wrap: wrap;
   justify-content: center;
 }
 

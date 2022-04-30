@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import style from './ProductPage.module.css';
 import { getProduct } from '../services/api';
 
 class ProductPage extends React.Component {
@@ -39,22 +40,24 @@ class ProductPage extends React.Component {
     const { product, loading } = this.state;
     const { addToCart } = this.props;
     return (
-      <div>
+      <div className={ style.container }>
+        <Link data-testid="shopping-cart-button" to="/carrinho">Carrinho</Link>
+        <br />
+        <br />
         { loading && <h2>Loading</h2> }
         <p data-testid="product-detail-name">
           { product.title }
         </p>
         <p>{ product.price }</p>
         <img src={ product.thumbnail } alt={ product.title } />
+        <br />
         <button
           data-testid="product-detail-add-to-cart"
           type="button"
           onClick={ () => addToCart(product) }
         >
           Adicionar ao carrinho
-
         </button>
-        <Link data-testid="shopping-cart-button" to="/carrinho">Carrinho</Link>
         <p>Especificação técnicas</p>
         { this.renderAttributes(product) }
       </div>

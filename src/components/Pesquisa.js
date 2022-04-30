@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import style from './Pesquisa.module.css';
 import Product from './Produto';
 import BarraCategoria from './BarraCategoria';
 
@@ -65,6 +66,7 @@ class Pesquisa extends React.Component {
     return (
       <div>
         <Link data-testid="shopping-cart-button" to="/carrinho">Carrinho</Link>
+        <br />
         <input
           type="text"
           data-testid="query-input"
@@ -81,13 +83,15 @@ class Pesquisa extends React.Component {
         </button>
         <BarraCategoria searchCategory={ this.searchCategory } />
         {this.returnText()}
-        { searchedProducts
-          .map((product) => (
-            <Product
-              addToCart={ addToCart }
-              product={ product }
-              key={ product.id }
-            />))}
+        <div className={ style.productList }>
+          { searchedProducts
+            .map((product) => (
+              <Product
+                addToCart={ addToCart }
+                product={ product }
+                key={ product.id }
+              />))}
+        </div>
       </div>
     );
   }

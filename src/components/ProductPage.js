@@ -10,6 +10,9 @@ class ProductPage extends React.Component {
     this.state = {
       product: {},
       loading: false,
+      email: '',
+      nota: '1',
+      avaliacao: '',
     };
   }
 
@@ -19,8 +22,26 @@ class ProductPage extends React.Component {
     this.setState({ loading: true },
       async () => {
         const data = await getProduct(id);
-        this.setState({ product: data, loading: false });
+        this.setState({
+          product: data,
+          loading: false,
+        });
       });
+  }
+
+  updateForm = (id, email, nota, avaliacao) => {
+    const { addReviews } = this.props;
+    addReviews(id, email, nota, avaliacao);
+    this.setState({
+      email: '',
+      nota: '1',
+      avaliacao: '',
+    });
+  }
+
+  handleChange = ({ target }) => {
+    const { value, name } = target;
+    this.setState({ [name]: value });
   }
 
   renderAttributes = (product) => {
@@ -37,8 +58,9 @@ class ProductPage extends React.Component {
   }
 
   render() {
-    const { product, loading } = this.state;
-    const { addToCart } = this.props;
+    const { product, loading, email, nota, avaliacao } = this.state;
+    const { addToCart, allReviews, match } = this.props;
+    const { id } = match.params;
     return (
       <div className={ style.container }>
         <Link data-testid="shopping-cart-button" to="/carrinho">Carrinho</Link>
@@ -60,6 +82,47 @@ class ProductPage extends React.Component {
         </button>
         <p>Especificação técnicas</p>
         { this.renderAttributes(product) }
+        <div>
+          <input
+            required
+            name="email"
+            type="text"
+            value={ email }
+            onChange={ this.handleChange }
+            data-testid="product-detail-email"
+          />
+          <select value={ nota } name="nota" onChange={ this.handleChange }>
+            <option data-testid="1-rating" value="1">1</option>
+            <option data-testid="2-rating" value="2">2</option>
+            <option data-testid="3-rating" value="3">3</option>
+            <option data-testid="4-rating" value="4">4</option>
+            <option data-testid="5-rating" value="5">5</option>
+          </select>
+          <textarea
+            name="avaliacao"
+            value={ avaliacao }
+            data-testid="product-detail-evaluation"
+            onChange={ this.handleChange }
+          />
+          <button
+            data-testid="submit-review-btn"
+            type="button"
+            onClick={ () => this.updateForm(id, email, nota, avaliacao) }
+          >
+            Avaliar
+          </button>
+          <div>
+            { allReviews !== null && allReviews
+              .filter((review) => review.id === id)
+              .map((review, index) => (
+                <div key={ index }>
+                  <p>{ review.email }</p>
+                  <p>{ review.nota }</p>
+                  <p>{ review.avaliacao }</p>
+                </div>
+              ))}
+          </div>
+        </div>
       </div>
     );
   }
@@ -68,6 +131,8 @@ class ProductPage extends React.Component {
 ProductPage.propTypes = {
   match: PropTypes.arrayOf,
   addToCart: PropTypes.func,
+  addReviews: PropTypes.func,
+  allReviews: PropTypes.arrayOf,
 }.isRequired;
 
 export default ProductPage;

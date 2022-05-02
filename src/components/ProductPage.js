@@ -57,6 +57,12 @@ class ProductPage extends React.Component {
     }
   }
 
+  freeShipping = (product) => {
+    if (product.shipping !== undefined && product.shipping.free_shipping) {
+      return <p data-testid="free-shipping">Frete Grátis</p>;
+    }
+  }
+
   render() {
     const { product, loading, email, nota, avaliacao } = this.state;
     const { addToCart, allReviews, match, cart } = this.props;
@@ -72,6 +78,7 @@ class ProductPage extends React.Component {
           { product.title }
         </p>
         <p>{ product.price }</p>
+        { this.freeShipping(product) }
         <img src={ product.thumbnail } alt={ product.title } />
         <br />
         <button

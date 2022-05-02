@@ -59,11 +59,12 @@ class ProductPage extends React.Component {
 
   render() {
     const { product, loading, email, nota, avaliacao } = this.state;
-    const { addToCart, allReviews, match } = this.props;
+    const { addToCart, allReviews, match, cart } = this.props;
     const { id } = match.params;
     return (
       <div className={ style.container }>
         <Link data-testid="shopping-cart-button" to="/carrinho">Carrinho</Link>
+        <p data-testid="shopping-cart-size">{ cart.length }</p>
         <br />
         <br />
         { loading && <h2>Loading</h2> }
@@ -133,6 +134,7 @@ ProductPage.propTypes = {
   addToCart: PropTypes.func,
   addReviews: PropTypes.func,
   allReviews: PropTypes.arrayOf,
+  cart: PropTypes.arrayOf,
 }.isRequired;
 
 export default ProductPage;

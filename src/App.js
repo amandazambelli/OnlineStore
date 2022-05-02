@@ -23,19 +23,33 @@ class App extends React.Component {
         allReviews: reviews,
       });
     }
+
+    const carrinho = localStorage.getItem('carrinho');
+    const produtosCarrinho = JSON.parse(carrinho);
+    if (produtosCarrinho !== null) {
+      this.setState({
+        cart: produtosCarrinho,
+      });
+    }
   }
 
   addToCart = (product) => {
     this.setState((prevState) => ({
       cart: [...prevState.cart, product],
-    }));
+    }), () => {
+      const { cart } = this.state;
+      localStorage.setItem('carrinho', JSON.stringify(cart));
+    });
   }
 
-  removeItemCart = (cart, product) => {
-    const index = cart.lastIndexOf(product);
-    cart.splice(index, 1);
-    this.setState(({ cart: [...cart] }
-    ));
+  removeItemCart = (carrinho, product) => {
+    const index = carrinho.lastIndexOf(product);
+    carrinho.splice(index, 1);
+    this.setState(({ cart: [...carrinho] }
+    ), () => {
+        const { cart } = this.state;
+        localStorage.setItem('carrinho', JSON.stringify(cart));
+      });
   }
 
   addReviews = (id, email, nota, avaliacao) => {
@@ -60,13 +74,18 @@ class App extends React.Component {
               addToCart={ this.addToCart }
               addReviews={ this.addReviews }
               allReviews={ allReviews }
+              cart={ cart }
             />) }
         />
         <Route
           exact
           path="/"
           render={ (props) => (
-            <Pesquisa { ...props } addToCart={ this.addToCart } />) }
+            <Pesquisa
+              { ...props }
+              addToCart={ this.addToCart }
+              cart={ cart }
+            />) }
         />
         <Route
           exact

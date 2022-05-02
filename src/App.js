@@ -17,9 +17,11 @@ class App extends React.Component {
   componentDidMount() {
     const getReview = localStorage.getItem('avaliacao');
     const reviews = JSON.parse(getReview);
-    this.setState({
-      allReviews: reviews,
-    });
+    if (reviews !== null) {
+      this.setState({
+        allReviews: reviews,
+      });
+    }
   }
 
   addToCart = (product) => {

@@ -14,6 +14,14 @@ class Carrinho extends React.Component {
     history.push('/checkout');
   }
 
+  displayAdd = (cart, element) => {
+    const itemQtd = cart.filter((item) => item === element).length;
+    console.log(itemQtd);
+    console.log(element.available_quantity);
+    if (itemQtd >= element.available_quantity) return true;
+    return false;
+  }
+
   render() {
     const { cart, removeItemCart, addToCart } = this.props;
     const ItensUnicos = [...new Set(cart)];
@@ -41,6 +49,7 @@ class Carrinho extends React.Component {
               data-testid="product-increase-quantity"
               type="button"
               onClick={ () => addToCart(element) }
+              disabled={ this.displayAdd(cart, element) }
             >
               +
             </button>

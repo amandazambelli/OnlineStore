@@ -3,6 +3,7 @@ import { Route, BrowserRouter } from 'react-router-dom';
 import Carrinho from './components/Carrinho';
 import Pesquisa from './components/Pesquisa';
 import ProductPage from './components/ProductPage';
+import Checkout from './components/Checkout';
 
 class App extends React.Component {
   constructor() {
@@ -76,6 +77,15 @@ class App extends React.Component {
               cart={ cart }
               removeItemCart={ this.removeItemCart }
               addToCart={ this.addToCart }
+            />) }
+        />
+        <Route
+          exact
+          path="/checkout"
+          render={ (props) => (
+            <Checkout
+              { ...props }
+              cart={ cart }
             />) }
         />
       </BrowserRouter>

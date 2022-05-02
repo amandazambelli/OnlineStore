@@ -9,6 +9,11 @@ class Carrinho extends React.Component {
     }
   }
 
+  toCheckout = () => {
+    const { history } = this.props;
+    history.push('/checkout');
+  }
+
   render() {
     const { cart, removeItemCart, addToCart } = this.props;
     const ItensUnicos = [...new Set(cart)];
@@ -45,6 +50,13 @@ class Carrinho extends React.Component {
           Total Carrinho:
           <span data-testid="product-increase-quantity">{ cart.length }</span>
         </p>
+        <button
+          type="button"
+          onClick={ this.toCheckout }
+          data-testid="checkout-products"
+        >
+          Finalizar Compra
+        </button>
       </div>
     );
   }
@@ -54,6 +66,7 @@ Carrinho.propTypes = {
   cart: PropTypes.arrayOf.isRequired,
   removeItemCart: PropTypes.func.isRequired,
   addToCart: PropTypes.func.isRequired,
+  history: PropTypes.arrayOf.isRequired,
 
 };
 

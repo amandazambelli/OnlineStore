@@ -12,17 +12,17 @@ class Product extends React.Component {
         <Link to={ `/product/${product.id}` } data-testid="product-detail-link">
           <img src={ product.thumbnail } alt={ product.title } />
         </Link>
-        <p>
+        <h3>
           R$
           {' '}
           { product.price }
-        </p>
+        </h3>
         <button
           type="button"
           data-testid="product-add-to-cart"
           onClick={ () => addToCart(product) }
         >
-          Adicionar ao carrinho
+          ADICIONAR
         </button>
       </div>
     );

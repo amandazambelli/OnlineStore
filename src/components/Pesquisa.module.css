@@ -8,3 +8,40 @@
 body {
   padding: 1rem;
 }
+
+.input {
+  width: 600px;
+  height: 30px;
+  border-radius: 5px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+  border: 1px solid grey;
+}
+
+.buttonSearch {
+  background-color: #7b56a0;
+  border-radius: 4px;
+  padding: 8px;
+  margin: 10px;
+  color: #f8f7f7;
+  border: none;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+}
+
+.buttonSearch:hover {
+  background-color: #533472;
+  color: #f8f7f7;
+}
+
+.buttonSearch:active {
+  background-color: #351b4e;
+  color: #f8f7f7;
+}
+
+.cartWidth {
+  position: absolute;
+  font-size: 30px;
+  right: 50px;
+}

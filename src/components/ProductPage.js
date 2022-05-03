@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { BsCart3 } from 'react-icons/bs';
 import style from './ProductPage.module.css';
 import { getProduct } from '../services/api';
 
@@ -41,25 +42,33 @@ class ProductPage extends React.Component {
     const { addToCart } = this.props;
     return (
       <div className={ style.container }>
-        <Link data-testid="shopping-cart-button" to="/carrinho">Carrinho</Link>
-        <br />
-        <br />
-        { loading && <h2>Loading</h2> }
-        <p data-testid="product-detail-name">
-          { product.title }
-        </p>
-        <p>{ product.price }</p>
-        <img src={ product.thumbnail } alt={ product.title } />
-        <br />
-        <button
-          data-testid="product-detail-add-to-cart"
-          type="button"
-          onClick={ () => addToCart(product) }
+        <Link
+          data-testid="shopping-cart-button"
+          to="/carrinho"
         >
-          Adicionar ao carrinho
-        </button>
-        <p>Especificação técnicas</p>
-        { this.renderAttributes(product) }
+          <BsCart3 className={ style.containerCart } />
+
+        </Link>
+        <br />
+        <br />
+        <div className={ style.secondDiv }>
+          { loading && <h2>Loading</h2> }
+          <h2 data-testid="product-detail-name">
+            { product.title }
+          </h2>
+          <h3>{ `Valor: ${product.price}` }</h3>
+          <img src={ product.thumbnail } alt={ product.title } />
+          <br />
+          <button
+            data-testid="product-detail-add-to-cart"
+            type="button"
+            onClick={ () => addToCart(product) }
+          >
+            ADICIONAR
+          </button>
+          <p>Especificação técnicas</p>
+          { this.renderAttributes(product) }
+        </div>
       </div>
     );
   }

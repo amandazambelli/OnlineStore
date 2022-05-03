@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { BsCart3 } from 'react-icons/bs';
 import style from './ProductPage.module.css';
 import { getProduct } from '../services/api';
 
@@ -69,27 +70,32 @@ class ProductPage extends React.Component {
     const { id } = match.params;
     return (
       <div className={ style.container }>
-        <Link data-testid="shopping-cart-button" to="/carrinho">Carrinho</Link>
+        <Link
+          data-testid="shopping-cart-button"
+          to="/carrinho"><BsCart3
+          className={ style.containerCart }/>
+        </Link>
         <p data-testid="shopping-cart-size">{ cart.length }</p>
         <br />
         <br />
-        { loading && <h2>Loading</h2> }
-        <p data-testid="product-detail-name">
+        <div className={ style.secondDiv }>
+          { loading && <h2>Loading</h2> }
+          <p data-testid="product-detail-name">
           { product.title }
-        </p>
-        <p>{ product.price }</p>
-        { this.freeShipping(product) }
-        <img src={ product.thumbnail } alt={ product.title } />
-        <br />
-        <button
-          data-testid="product-detail-add-to-cart"
-          type="button"
-          onClick={ () => addToCart(product) }
-        >
-          Adicionar ao carrinho
-        </button>
-        <p>Especificação técnicas</p>
-        { this.renderAttributes(product) }
+          </p>
+          <p>{ product.price }</p>
+          { this.freeShipping(product) }
+          <img src={ product.thumbnail } alt={ product.title } />
+          <br />
+          <button
+            data-testid="product-detail-add-to-cart"
+            type="button"
+            onClick={ () => addToCart(product) }
+          >
+            Adicionar ao carrinho
+          </button>
+          <p>Especificação técnicas</p>
+          { this.renderAttributes(product) }
         <div>
           <input
             required

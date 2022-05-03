@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { BsCart3 } from 'react-icons/bs';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import style from './Pesquisa.module.css';
 import Product from './Produto';
@@ -80,8 +81,28 @@ class Pesquisa extends React.Component {
           data-testid="query-button"
           onClick={ this.searchProduts }
         >
-          Buscar
-        </button>
+          <BsCart3 className={ style.cartWidth } />
+
+        </Link>
+        <br />
+        <div className={ style.positionInput }>
+          <input
+            type="text"
+            data-testid="query-input"
+            name="searchBox"
+            onChange={ this.handleChange }
+            value={ searchBox }
+            className={ style.input }
+          />
+          <button
+            type="submit"
+            data-testid="query-button"
+            onClick={ this.searchProduts }
+            className={ style.buttonSearch }
+          >
+            BUSCAR
+          </button>
+        </div>
         <BarraCategoria searchCategory={ this.searchCategory } />
         {this.returnText()}
         <div className={ style.productList }>

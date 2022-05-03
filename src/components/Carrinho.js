@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { RiAddCircleLine } from 'react-icons/ri';
+import { MdRemoveCircleOutline } from 'react-icons/md';
+import style from './Carrinho.module.css';
 
 class Carrinho extends React.Component {
   renderCart = () => {
@@ -26,21 +29,32 @@ class Carrinho extends React.Component {
     const { cart, removeItemCart, addToCart } = this.props;
     const ItensUnicos = [...new Set(cart)];
     return (
-      <div>
+      <div className={ style.containerCarrinho }>
         { this.renderCart() }
         { ItensUnicos.map((element) => (
-          <div key={ element.id }>
-            <p data-testid="shopping-cart-product-name">{ element.title }</p>
-            <img src={ element.thumbnail } alt={ element.title } />
-            <p>{ element.price }</p>
+          <div key={ element.id } className={ style.cart }>
+            <p
+              data-testid="shopping-cart-product-name"
+              className={ style.containerTotal }
+            >
+              { element.title }
+
+            </p>
+            <img
+              src={ element.thumbnail }
+              alt={ element.title }
+              className={ style.containerImg }
+            />
+            <p className={ style.containerPrice }>{ `R$: ${element.price}` }</p>
             <button
               data-testid="product-decrease-quantity"
               type="button"
               onClick={ () => removeItemCart(cart, element) }
+              className={ style.containerButton }
             >
-              -
+              <MdRemoveCircleOutline />
             </button>
-            <p>
+            <p className={ style.containerButton3 }>
               <span data-testid="shopping-cart-product-quantity">
                 { cart.filter((item) => item === element).length }
               </span>
@@ -49,14 +63,16 @@ class Carrinho extends React.Component {
               data-testid="product-increase-quantity"
               type="button"
               onClick={ () => addToCart(element) }
+              className={ style.containerButton }
               disabled={ this.displayAdd(cart, element) }
             >
-              +
+              <RiAddCircleLine />
             </button>
           </div>
         )) }
-        <p>
+        <p className={ style.containerTotal }>
           Total Carrinho:
+          {' '}
           <span data-testid="product-increase-quantity">{ cart.length }</span>
         </p>
         <button

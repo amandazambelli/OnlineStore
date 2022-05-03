@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getCategories } from '../services/api';
+import style from './BarraCategoria.module.css';
 
 class BarraCategoria extends React.Component {
   constructor() {
@@ -30,6 +31,7 @@ class BarraCategoria extends React.Component {
             data-testid="category"
             value={ element.id }
             onClick={ () => searchCategory(element.id) }
+            className={ style.containerButton }
           >
             { element.name }
           </button>)) }

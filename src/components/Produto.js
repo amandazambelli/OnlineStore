@@ -18,10 +18,11 @@ class Product extends React.Component {
         <Link to={ `/product/${product.id}` } data-testid="product-detail-link">
           <img src={ product.thumbnail } alt={ product.title } />
         </Link>
-        <p>
+        <h3>
           R$
           {' '}
           { product.price }
+        </h3>
         </p>
         { this.freeShipping(product) }
         <button
@@ -29,7 +30,7 @@ class Product extends React.Component {
           data-testid="product-add-to-cart"
           onClick={ () => addToCart(product) }
         >
-          Adicionar ao carrinho
+          ADICIONAR
         </button>
       </div>
     );

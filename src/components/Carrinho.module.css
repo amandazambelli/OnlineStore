@@ -1,27 +1,3 @@
-/* .containerCarrinho {
-    background-color: #f8f7f7;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
-    border-radius: 5px;
-}
-
-.containerButton {
-    position: absolute;
-    top: 80px;
-    right: 100px;
-}
-
-.containerButton2 {
-    position: absolute;
-    top: 80px;
-    right: 50px;
-}
-
-.containerButton3 {
-    position: absolute;
-    top: 80px;
-    right: 82px;
-} */
-
 .containerButton {
   border: none;
   background-color: #f8f7f7;

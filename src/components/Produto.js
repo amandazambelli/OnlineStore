@@ -4,6 +4,12 @@ import { Link } from 'react-router-dom';
 import style from './Produto.module.css';
 
 class Product extends React.Component {
+  freeShipping = (product) => {
+    if (product.shipping !== undefined && product.shipping.free_shipping) {
+      return <p data-testid="free-shipping">Frete Grátis</p>;
+    }
+  }
+
   render() {
     const { product, addToCart } = this.props;
     return (
@@ -17,6 +23,8 @@ class Product extends React.Component {
           {' '}
           { product.price }
         </h3>
+        </p>
+        { this.freeShipping(product) }
         <button
           type="button"
           data-testid="product-add-to-cart"

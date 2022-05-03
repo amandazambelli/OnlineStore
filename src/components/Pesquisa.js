@@ -63,12 +63,23 @@ class Pesquisa extends React.Component {
 
   render() {
     const { searchBox, searchedProducts } = this.state;
-    const { addToCart } = this.props;
+    const { addToCart, cart } = this.props;
     return (
       <div>
-        <Link
-          data-testid="shopping-cart-button"
-          to="/carrinho"
+        <Link data-testid="shopping-cart-button" to="/carrinho">Carrinho</Link>
+        <p data-testid="shopping-cart-size">{ cart.length }</p>
+        <br />
+        <input
+          type="text"
+          data-testid="query-input"
+          name="searchBox"
+          onChange={ this.handleChange }
+          value={ searchBox }
+        />
+        <button
+          type="submit"
+          data-testid="query-button"
+          onClick={ this.searchProduts }
         >
           <BsCart3 className={ style.cartWidth } />
 
@@ -110,6 +121,7 @@ class Pesquisa extends React.Component {
 
 Pesquisa.propTypes = {
   addToCart: PropTypes.func.isRequired,
+  cart: PropTypes.arrayOf.isRequired,
 };
 
 export default Pesquisa;

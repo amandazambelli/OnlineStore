@@ -12,6 +12,19 @@ class Carrinho extends React.Component {
     }
   }
 
+  toCheckout = () => {
+    const { history } = this.props;
+    history.push('/checkout');
+  }
+
+  displayAdd = (cart, element) => {
+    const itemQtd = cart.filter((item) => item === element).length;
+    console.log(itemQtd);
+    console.log(element.available_quantity);
+    if (itemQtd >= element.available_quantity) return true;
+    return false;
+  }
+
   render() {
     const { cart, removeItemCart, addToCart } = this.props;
     const ItensUnicos = [...new Set(cart)];
@@ -51,6 +64,7 @@ class Carrinho extends React.Component {
               type="button"
               onClick={ () => addToCart(element) }
               className={ style.containerButton }
+              disabled={ this.displayAdd(cart, element) }
             >
               <RiAddCircleLine />
             </button>
@@ -61,6 +75,13 @@ class Carrinho extends React.Component {
           {' '}
           <span data-testid="product-increase-quantity">{ cart.length }</span>
         </p>
+        <button
+          type="button"
+          onClick={ this.toCheckout }
+          data-testid="checkout-products"
+        >
+          Finalizar Compra
+        </button>
       </div>
     );
   }
@@ -70,6 +91,7 @@ Carrinho.propTypes = {
   cart: PropTypes.arrayOf.isRequired,
   removeItemCart: PropTypes.func.isRequired,
   addToCart: PropTypes.func.isRequired,
+  history: PropTypes.arrayOf.isRequired,
 
 };
 

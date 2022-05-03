@@ -1,9 +1,9 @@
 .containerButton {
-  border: none;
   background-color: #f8f7f7;
+  border: none;
   font-size: 20px;
-  width: 50px;
   margin: 8px;
+  width: 50px;
   margin-left: 10px;
 }
 
@@ -22,16 +22,16 @@
 }
 
 .containerImg {
-  width: 120px;
-  margin-left: 30px;
   margin-bottom: 10px;
+  margin-left: 30px;
+  width: 120px;
 }
 
 .containerButton3 {
   margin-left: 30px;
-} 
+}
 
 .containerPrice {
-  margin-left: 15px;
   font-size: 17px;
+  margin-left: 15px;
 }

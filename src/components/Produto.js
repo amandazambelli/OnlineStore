@@ -23,7 +23,6 @@ class Product extends React.Component {
           {' '}
           { product.price }
         </h3>
-        </p>
         { this.freeShipping(product) }
         <button
           type="button"

@@ -13,24 +13,26 @@ class Product extends React.Component {
   render() {
     const { product, addToCart } = this.props;
     return (
-      <div data-testid="product" className={ style.container }>
-        <p>{ product.title }</p>
-        <Link to={ `/product/${product.id}` } data-testid="product-detail-link">
-          <img src={ product.thumbnail } alt={ product.title } />
-        </Link>
-        <h3>
-          R$
-          {' '}
-          { product.price }
-        </h3>
-        { this.freeShipping(product) }
-        <button
-          type="button"
-          data-testid="product-add-to-cart"
-          onClick={ () => addToCart(product) }
-        >
-          ADICIONAR
-        </button>
+      <div className={ style.produtos }>
+        <div data-testid="product" className={ style.container }>
+          <p>{ product.title }</p>
+          <Link to={ `/product/${product.id}` } data-testid="product-detail-link">
+            <img src={ product.thumbnail } alt={ product.title } />
+          </Link>
+          <h3>
+            R$
+            {' '}
+            { product.price }
+          </h3>
+          { this.freeShipping(product) }
+          <button
+            type="button"
+            data-testid="product-add-to-cart"
+            onClick={ () => addToCart(product) }
+          >
+            ADICIONAR
+          </button>
+        </div>
       </div>
     );
   }

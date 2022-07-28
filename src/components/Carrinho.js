@@ -1,118 +1,112 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { BsCart3 } from 'react-icons/bs';
-import { RiAddCircleLine } from 'react-icons/ri';
-import { MdRemoveCircleOutline } from 'react-icons/md';
-import style from './Carrinho.module.css';
-
-class Carrinho extends React.Component {
-  renderCart = () => {
-    const { cart } = this.props;
-    if (cart.length === 0) {
-      return <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>;
-    }
-  }
-
-  toCheckout = () => {
-    // const { history } = this.props;
-    // history.push('/checkout');
-  }
-
-  displayAdd = (cart, element) => {
-    const itemQtd = cart.filter((item) => item === element).length;
-    console.log(itemQtd);
-    console.log(element.available_quantity);
-    if (itemQtd >= element.available_quantity) return true;
-    return false;
-  }
-
-  render() {
-    const { cart, removeItemCart, addToCart } = this.props;
-    const ItensUnicos = [...new Set(cart)];
-    return (
-      <div>
-        <header>
-          <Link
-            to="/"
-          >
-            <h1>Front-End Online Store</h1>
-          </Link>
-          <Link
-            data-testid="shopping-cart-button"
-            to="/carrinho"
-            className={ style.link }
-          >
-            <BsCart3 className={ style.cartWidth } />
-            <p data-testid="shopping-cart-size">{ cart.length }</p>
-          </Link>
-        </header>
-        <div className={ style.containerCarrinho }>
-          { this.renderCart() }
-          { ItensUnicos.map((element) => (
-            <div key={ element.id } className={ style.cart }>
-              <p
-                data-testid="shopping-cart-product-name"
-                className={ style.containerTotal }
-              >
-                { element.title }
-
-              </p>
-              <img
-                src={ element.thumbnail }
-                alt={ element.title }
-                className={ style.containerImg }
-              />
-              <p className={ style.containerPrice }>{ `R$: ${element.price}` }</p>
-              <button
-                data-testid="product-decrease-quantity"
-                type="button"
-                onClick={ () => removeItemCart(cart, element) }
-                className={ style.containerButton }
-              >
-                <MdRemoveCircleOutline />
-              </button>
-              <p className={ style.containerButton3 }>
-                <span data-testid="shopping-cart-product-quantity">
-                  { cart.filter((item) => item === element).length }
-                </span>
-              </p>
-              <button
-                data-testid="product-increase-quantity"
-                type="button"
-                onClick={ () => addToCart(element) }
-                className={ style.containerButton }
-                disabled={ this.displayAdd(cart, element) }
-              >
-                <RiAddCircleLine />
-              </button>
-            </div>
-          )) }
-          <p className={ style.containerTotalCart }>
-            Total Carrinho:
-            {' '}
-            <span data-testid="product-increase-quantity">{ cart.length }</span>
-          </p>
-          <button
-            type="button"
-            onClick={ this.toCheckout }
-            data-testid="checkout-products"
-            className={ style.finalizar }
-          >
-            Finalizar Compra
-          </button>
-        </div>
-      </div>
-    );
-  }
+header {
+  width: 100%;
+  height: 4rem;
+  background-color: #7b56a0;
+  display: flex;
+  flex-direction: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem;
 }
 
-Carrinho.propTypes = {
-  cart: PropTypes.arrayOf.isRequired,
-  removeItemCart: PropTypes.func.isRequired,
-  addToCart: PropTypes.func.isRequired,
-  // history: PropTypes.arrayOf.isRequired,
+header h1 {
+  color: white;
+}
 
-};
+header p {
+  color: white;
+}
 
-export default Carrinho;
+.link {
+  display: flex;
+  flex-direction: row nowrap;
+  justify-content: flex-end;
+}
+
+.cartWidth {
+  font-size: 30px;
+  color: white;
+}
+
+.containerCarrinho {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.containerButton {
+  background-color: #f8f7f7;
+  border: none;
+  font-size: 20px;
+  margin: 8px;
+  margin-left: 10px;
+  width: 60%;
+}
+
+.cart {
+  background-color: #f8f7f7;
+  border-radius: 15px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 10px;
+  margin-top: 20px;
+  width: 40%;
+}
+
+.containerTotal {
+  color: #7b56a0;
+  font-size: 18px;
+  margin: 15px;
+  margin-left: 15px;
+  padding-top: 10px;
+}
+
+.containerTotalCart {
+  color: #7b56a0;
+  font-size: 25px;
+  margin: 15px;
+  margin-left: 15px;
+  padding-top: 10px;
+}
+
+.containerImg {
+  margin-bottom: 10px;
+  margin-left: 30px;
+  width: 120px;
+}
+
+.containerButton3 {
+  margin-left: 30px;
+  color: #7b56a0;
+  font-size: 20px;
+}
+
+.containerPrice {
+  font-size: 20px;
+  margin-left: 15px;
+  color: #7b56a0;
+}
+
+.finalizar {
+  background-color: #7b56a0;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+  color: #f8f7f7;
+  margin: 10px;
+  padding: 15px;
+  width: 40%;
+  font-size: 20px;
+}
+
+.finalizar:hover {
+  background-color: #533472;
+  color: #f8f7f7;
+}
+
+.finalizar:active {
+  background-color: #351b4e;
+  color: #f8f7f7;
+}

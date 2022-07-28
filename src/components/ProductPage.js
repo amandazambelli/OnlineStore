@@ -70,23 +70,27 @@ class ProductPage extends React.Component {
     const { id } = match.params;
     return (
       <div className={ style.container }>
-        <Link
-          data-testid="shopping-cart-button"
-          to="/carrinho"
-        >
-          <BsCart3
-            className={ style.containerCart }
-          />
-        </Link>
-        <p data-testid="shopping-cart-size">{ cart.length }</p>
-        <br />
-        <br />
+        <header>
+          <Link
+            to="/"
+          >
+            <h1>Front-End Online Store</h1>
+          </Link>
+          <Link
+            data-testid="shopping-cart-button"
+            to="/carrinho"
+            className={ style.link }
+          >
+            <BsCart3 className={ style.cartWidth } />
+            <p data-testid="shopping-cart-size">{ cart.length }</p>
+          </Link>
+        </header>
         <div className={ style.secondDiv }>
           { loading && <h2>Loading</h2> }
-          <p data-testid="product-detail-name">
+          <p className={ style.productName } data-testid="product-detail-name">
             { product.title }
           </p>
-          <p>{ product.price }</p>
+          <p className={ style.productPrice }>{ product.price }</p>
           { this.freeShipping(product) }
           <img src={ product.thumbnail } alt={ product.title } />
           <br />
@@ -97,29 +101,44 @@ class ProductPage extends React.Component {
           >
             Adicionar ao carrinho
           </button>
-          <p>Especificação técnicas</p>
-          { this.renderAttributes(product) }
-          <div>
-            <input
-              required
-              name="email"
-              type="text"
-              value={ email }
-              onChange={ this.handleChange }
-              data-testid="product-detail-email"
-            />
-            <select value={ nota } name="nota" onChange={ this.handleChange }>
-              <option data-testid="1-rating" value="1">1</option>
-              <option data-testid="2-rating" value="2">2</option>
-              <option data-testid="3-rating" value="3">3</option>
-              <option data-testid="4-rating" value="4">4</option>
-              <option data-testid="5-rating" value="5">5</option>
-            </select>
+          <div className={ style.attributes }>
+            <p className={ style.especificacoes }>Especificação técnicas</p>
+            { this.renderAttributes(product) }
+          </div>
+          <div className={ style.avaliacao }>
+            <div className={ style.divInput }>
+              <input
+                required
+                name="email"
+                type="text"
+                value={ email }
+                onChange={ this.handleChange }
+                data-testid="product-detail-email"
+                placeholder="Email"
+              />
+              <label htmlFor="nota">
+                Nota:
+                {' '}
+                <select
+                  value={ nota }
+                  name="nota"
+                  onChange={ this.handleChange }
+                  id="nota"
+                >
+                  <option data-testid="1-rating" value="1">1</option>
+                  <option data-testid="2-rating" value="2">2</option>
+                  <option data-testid="3-rating" value="3">3</option>
+                  <option data-testid="4-rating" value="4">4</option>
+                  <option data-testid="5-rating" value="5">5</option>
+                </select>
+              </label>
+            </div>
             <textarea
               name="avaliacao"
               value={ avaliacao }
               data-testid="product-detail-evaluation"
               onChange={ this.handleChange }
+              placeholder="Escreva sua avaliação"
             />
             <button
               data-testid="submit-review-btn"
@@ -128,14 +147,26 @@ class ProductPage extends React.Component {
             >
               Avaliar
             </button>
-            <div>
+            <div className={ style.avaliados }>
               { allReviews !== null && allReviews
                 .filter((review) => review.id === id)
                 .map((review, index) => (
-                  <div key={ index }>
-                    <p>{ review.email }</p>
-                    <p>{ review.nota }</p>
-                    <p>{ review.avaliacao }</p>
+                  <div className={ style.divAvaliados } key={ index }>
+                    <p>
+                      Email:
+                      {' '}
+                      { review.email }
+                    </p>
+                    <p>
+                      Nota:
+                      {' '}
+                      { review.nota }
+                    </p>
+                    <p>
+                      Avaliação:
+                      {' '}
+                      { review.avaliacao }
+                    </p>
                   </div>
                 ))}
             </div>

@@ -1,3 +1,9 @@
+.containerCategorias {
+  width: 80%;
+  margin-left: 12%;
+  padding-bottom: 2rem;
+}
+
 .containerButton {
   background-color: #f8f7f7;
   border: none;

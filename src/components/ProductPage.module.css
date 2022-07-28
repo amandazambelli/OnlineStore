@@ -1,5 +1,26 @@
-.container {
-  padding: 1rem;
+header {
+  width: 100%;
+  height: 4rem;
+  background-color: #7b56a0;
+  display: flex;
+  flex-direction: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem;
+}
+
+header h1 {
+  color: white;
+}
+
+header p {
+  color: white;
+}
+
+.link {
+  display: flex;
+  flex-direction: row nowrap;
+  justify-content: flex-end;
 }
 
 .secondDiv {
@@ -15,12 +36,25 @@
   width: 900px;
 }
 
-.container h2 {
+.secondDiv img {
+  width: 220px;
+  padding: 1rem;
+}
+
+.productName {
+  color: #7b56a0;
+  padding: 0.5rem;
   font-size: 25px;
 }
 
-.container p {
-  font-size: 18px;
+.productPrice {
+  color: #574c63;
+  padding: 0.5rem;
+  font-size: 25px;
+}
+
+.container h2 {
+  font-size: 25px;
 }
 
 .container button {
@@ -28,9 +62,11 @@
   border: none;
   border-radius: 4px;
   color: #f8f7f7;
+  font-size: 20px;
   margin: 10px;
   padding: 8px;
   transition-duration: 0.3s;
+  width: 40%;
 }
 
 .container button:hover {
@@ -45,4 +81,62 @@
 
 .containerCart {
   font-size: 30px;
+}
+
+.cartWidth {
+  font-size: 30px;
+  color: white;
+}
+
+.attributes {
+  color: #574c63;
+  padding: 0.5rem;
+  font-size: 18px;
+}
+
+.attributes p {
+  padding: 0.5rem;
+}
+
+.especificacoes {
+  font-size: 25px;
+}
+
+.avaliacao {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avaliacao input {
+  width: 70%;
+}
+
+.divInput {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.avaliacao textarea {
+  height: 100px;
+  width: 40%;
+  margin-top: 1rem;
+}
+
+.avaliados {
+  width: 100%
+}
+
+.divAvaliados {
+  background-color: #f8f7f7;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  padding: 15px;
+  position: relative;
+  text-align: center;
+  width: 30%;
 }

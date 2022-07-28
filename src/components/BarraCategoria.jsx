@@ -23,7 +23,7 @@ class BarraCategoria extends React.Component {
     const { selecionarCategorias } = this.state;
     const { searchCategory } = this.props;
     return (
-      <div>
+      <div className={ style.containerCategorias }>
         { selecionarCategorias.map((element) => (
           <button
             type="button"

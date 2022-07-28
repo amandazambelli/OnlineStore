@@ -47,7 +47,7 @@ class Pesquisa extends React.Component {
     const { searchedProducts, searched } = this.state;
     if (!searched) {
       return (
-        <h3 data-testid="home-initial-message">
+        <h3 data-testid="home-initial-message" className={ style.digite }>
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h3>
       );
@@ -66,16 +66,17 @@ class Pesquisa extends React.Component {
     const { addToCart, cart } = this.props;
     return (
       <div>
-        <Link
-          data-testid="shopping-cart-button"
-          to="/carrinho"
-        >
-          <BsCart3 className={ style.cartWidth } />
-
-        </Link>
-        <p data-testid="shopping-cart-size">{ cart.length }</p>
-        <br />
-        <br />
+        <header>
+          <h1>Front-End Online Store</h1>
+          <Link
+            data-testid="shopping-cart-button"
+            to="/carrinho"
+            className={ style.link }
+          >
+            <BsCart3 className={ style.cartWidth } />
+            <p data-testid="shopping-cart-size">{ cart.length }</p>
+          </Link>
+        </header>
         <div className={ style.positionInput }>
           <input
             type="text"
